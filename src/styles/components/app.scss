@@ -1,0 +1,10 @@
+@import "../_variables/index.scss";
+
+#app {
+  font-family: $main-font;
+  font-style: $font-style;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: $font-color-base;
+  background-color: $bg-main;
+}

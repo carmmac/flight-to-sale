@@ -1,0 +1,16 @@
+@import "../_variables/index.scss";
+
+.btn {
+  padding: 0;
+  border: none;
+  cursor: pointer;
+
+  &--show-more {
+    background-color: #e3e3e3;
+  }
+
+  &--flight-select {
+    background-color: $bg-button--card;
+    color: $font-color-contrast;
+  }
+}

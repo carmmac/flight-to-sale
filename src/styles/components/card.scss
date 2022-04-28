@@ -1,0 +1,21 @@
+/* Flight card */
+@import "../_variables/index.scss";
+@import "../_mixins/index.scss";
+.card__header {
+  background-color: $bg-card-header;
+  color: $font-color-contrast;
+}
+
+.card-price {
+  text-align: end;
+
+  &__title {
+    display: block;
+    @include text-price;
+  }
+
+  &__info {
+    display: block;
+    @include text-sub;
+  }
+}

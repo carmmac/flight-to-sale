@@ -1,0 +1,20 @@
+/* MIXINS */
+@import "../_variables/index.scss";
+
+@mixin text-base {
+  font-size: $font-size-base;
+  font-weight: $font-weight-regular;
+  line-height: $line-height-base;
+}
+
+@mixin text-price {
+  font-size: $font-size-price;
+  font-weight: $font-weight-regular;
+  line-height: $line-height-price;
+}
+
+@mixin text-sub {
+  font-size: $font-size-sub;
+  font-weight: $font-weight-regular;
+  line-height: $line-height-sub;
+}
