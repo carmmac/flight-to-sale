@@ -1,0 +1,31 @@
+/* Text content */
+
+.text {
+  &--base {
+    @include text-base;
+  }
+
+  &--main-info {
+    @include text-main;
+  }
+
+  &--filter-heading {
+    @include filter-heading;
+  }
+
+  &--filter-text {
+    @include filter-text;
+  }
+
+  &--price {
+    @include text-price
+  }
+
+  &--sub {
+    @include text-sub;
+  }
+
+  &--info {
+    @include text-info;
+  }
+}

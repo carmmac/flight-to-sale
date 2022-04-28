@@ -1,19 +1,20 @@
 /* FONT OPTIONS */
 
-$main-font: "Roboto", "Avenir", Helvetica, Arial, sans-serif;
+$main-font: "PT Sans", Helvetica, Arial, sans-serif;
 $font-style: normal;
 $font-weight-regular: 400;
 $font-weight-bold: 700;
 
 /* Font-size */
-$font-size-base: 16px;
-$font-size-info: 14px;
-$font-size-price: 18px;
+$font-size-main-info: 18px;
+$font-size-base: 14px;
+$font-size-price: 20px;
 $font-size-sub: 11px;
 
 /* Line-height */
 $line-height-extension: 2px;
-$line-height-base: $font-size-base + $line-height-extension;
+$line-height-main-info: $font-size-main-info + $line-height-extension;
+$line-height-base: $font-size-main-info + $line-height-extension;
 $line-height-sub: $font-size-sub + $line-height-extension;
 $line-height-price: $font-size-price + $line-height-extension;
-$line-height-info: $font-size-info + $line-height-extension;
+$line-height-info: $font-size-base + $line-height-extension;

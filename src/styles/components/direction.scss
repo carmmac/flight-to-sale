@@ -1,0 +1,63 @@
+/* Flight route */
+
+.route {
+  position: relative;
+  padding: 0 15px;
+  border-bottom: 2px solid $color-second;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.route__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+
+.route-header {
+  border-bottom: 1px solid $color-sub;
+}
+
+.route-transfers {
+  position: relative;
+  // width: fit-content;
+  text-align: center;
+  margin: 0 auto;
+  @include text--highlight;
+
+  &::before, &::after {
+    position: absolute;
+    content: '';
+    width: 35%;
+    height: 1px;
+    top: 50%;
+    background-color: $color-base;
+  }
+
+  &::before {
+    left: 5%;
+  }
+
+  &::after {
+    right: 5%;
+  }
+}
+
+.departure-header {
+  text-align: center;
+}
+
+.airport {
+  margin-right: 5px;
+}
+
+.departure__date {
+  margin-left: 5px;
+}
+
+.arrival__date {
+  margin-right: 5px;
+}

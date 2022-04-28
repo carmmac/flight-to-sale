@@ -6,8 +6,8 @@
       <header class="card__header">
         <div class="card-logo"></div>
         <div class="card-price">
-          <span class="card-price__title">21900 P</span>
-          <span class="card-price__info">Стоимость для одного взрослого пассажира</span>
+          <span class="card-price__title text--price">21900 P</span>
+          <span class="card-price__info text--sub">Стоимость для одного взрослого пассажира</span>
         </div>
       </header>
       <div class="card__body">
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import FlightDirection from './flight-direction.vue';
+import FlightDirection from './flight-route.vue';
 
 export default {
   name: 'FlightCard',

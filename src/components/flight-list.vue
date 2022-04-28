@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="list-wrapper">
     <!-- <h2 class="visually-hidden">Список предложений</h2> -->
     <ul class="flight-list">
       <flight-card />
@@ -16,14 +16,3 @@ export default {
   components: { FlightCard },
 };
 </script>
-
-<style scoped>
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-</style>

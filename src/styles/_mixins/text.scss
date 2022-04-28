@@ -1,5 +1,10 @@
 /* MIXINS */
-@import "../_variables/index.scss";
+
+@mixin text-main {
+  font-size: $font-size-main-info;
+  font-weight: $font-weight-regular;
+  line-height: $line-height-main-info;
+}
 
 @mixin text-base {
   font-size: $font-size-base;
@@ -17,4 +22,30 @@
   font-size: $font-size-sub;
   font-weight: $font-weight-regular;
   line-height: $line-height-sub;
+}
+
+@mixin text-info {
+  font-size: $font-size-base;
+  font-weight: $font-weight-regular;
+  line-height: $line-height-base;
+  color: $font-color-info;
+}
+
+@mixin text--highlight {
+  font-size: $font-size-base;
+  font-weight: $font-weight-regular;
+  line-height: $line-height-base;
+  color: $font-color-highlight;
+}
+
+@mixin filter-heading {
+  font-size: $font-size-base;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-info;
+}
+
+@mixin filter-text {
+  font-size: $font-size-base;
+  font-weight: $font-weight-regular;
+  line-height: $line-height-base;
 }
