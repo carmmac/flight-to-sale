@@ -4,17 +4,15 @@
       <div class="page-wrapper">
         <h1 class="visually-hidden">Агрегатор поиска авиабилетов</h1>
         <filter-panel />
-        <flight-list v-if="isDataLoaded" />
-        <div v-else>LOADING...</div>
+        <flight-list />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
+import { mapActions } from 'vuex';
 import { ActionType } from './store/actions';
-import { State } from './store/state';
 import FlightList from './components/flight-list.vue';
 import FilterPanel from './components/filters.vue';
 
@@ -26,11 +24,6 @@ export default {
   },
   created() {
     this.load();
-  },
-  computed: {
-    ...mapState({
-      isDataLoaded: [State.IS_DATA_LOADED],
-    }),
   },
   methods: {
     ...mapActions({

@@ -4,12 +4,20 @@
   padding: 0;
   border: none;
   cursor: pointer;
+  @include text-main;
 
   &--load-more {
-    background-color: #e3e3e3;
+    display: block;
+    width: 250px;
+    padding: 10px;
+    margin: 0 auto;
+    border: 1px solid $color-base;
+    background-color: $color-sub;
   }
 
   &--flight-select {
+    width: 100%;
+    padding: 10px;
     background-color: $bg-button--card;
     color: $font-color-contrast;
   }
