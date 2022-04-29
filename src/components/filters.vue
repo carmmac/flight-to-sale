@@ -43,14 +43,14 @@
       <fieldset class="filter-section">
         <!-- v-for -->
         <h3 class="text--filter-heading">Авиакомпании</h3>
-        <label class="text--base" :for="`carrier-${id}`">
+        <!-- <label class="text--base" :for="`carrier-${id}`">
           <input type="checkbox" name="carrier" :id="`carrier-${id}`" />
           -- на основании данных --</label
         >
         <label class="text--base" :for="`carrier-${id}`">
           <input type="checkbox" name="carrier" :id="`carrier-${id}`" />
           -- на основании данных --</label
-        >
+        > -->
       </fieldset>
     </form>
   </aside>
