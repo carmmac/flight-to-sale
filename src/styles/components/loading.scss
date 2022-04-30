@@ -2,7 +2,6 @@
 
 .loading-container {
   text-align: center;
-  // margin-left: 25%;
   margin: 0 auto;
 }
 
@@ -21,10 +20,10 @@
   width: 64px;
   height: 64px;
   margin: 8px;
-  border: 8px solid #000;
+  border: 8px solid $color-second;
   border-radius: 50%;
   animation: loading 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: #000 transparent transparent transparent;
+  border-color: $color-second transparent transparent transparent;
 }
 .loading div:nth-child(1) {
   animation-delay: -0.45s;

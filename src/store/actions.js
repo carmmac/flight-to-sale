@@ -9,7 +9,7 @@ const actions = {
   [ActionType.FETCH_FLIGHTS]: ({ commit }) => {
     setTimeout(() => {
       commit(MutationType.SET_FLIGHTS, mocks.flights);
-      commit(MutationType.SET_DATA_LOADED);
+      commit(MutationType.SET_DATA_LOADED, true);
     }, 1000);
   },
 };

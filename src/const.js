@@ -1,10 +1,22 @@
 /* Constant vars */
 
 const CARDS_PER_PAGE_LIMIT = 10;
+const CARRIER_LABEL_LENGTH_MAX = 14;
+
+const Currency = {
+  RUB: 'RUB',
+  USD: 'USD',
+  EUR: 'EUR',
+};
 
 const DateFormat = {
   DATE: 'DD MMM ddd',
   TIME: 'HH:mm',
 };
 
-export { CARDS_PER_PAGE_LIMIT, DateFormat };
+export {
+  CARDS_PER_PAGE_LIMIT,
+  CARRIER_LABEL_LENGTH_MAX,
+  Currency,
+  DateFormat,
+};
