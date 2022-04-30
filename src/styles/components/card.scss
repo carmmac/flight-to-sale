@@ -5,11 +5,18 @@
 }
 
 .card__header {
+  display: flex;
+  padding: 5px;
   background-color: $bg-card-header;
   color: $font-color-contrast;
 }
 
+.card-logo {
+  height: 100%;
+}
+
 .card-price {
+  margin-left: auto;
   text-align: end;
 
   &__title {

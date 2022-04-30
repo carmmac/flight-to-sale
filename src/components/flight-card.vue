@@ -1,9 +1,8 @@
 <template>
-  <!-- вставлять названия городов -->
-  <!-- <h3 class="visually-hidden">Перелет</h3> -->
   <article>
+    <h3 class="visually-hidden">Перелет</h3>
     <header class="card__header">
-      <div class="card-logo"></div>
+      <img :src="getLogo()" class="card-logo" alt="Carrier logo" />
       <div class="card-price">
         <span class="card-price__title text--price">{{ getTotalPrice }}</span>
         <span class="card-price__info text--sub">Стоимость для одного взрослого пассажира</span>
@@ -11,14 +10,12 @@
     </header>
     <div class="card__body">
       <div class="card__directions">
-        <!-- различать -->
         <flight-route
           v-for="(transfer, i) in route.flight.legs"
           :key="`leg-${i}`"
           :transfer="transfer"
           :carrier="route.flight.carrier"
         />
-        <!-- <flight-route :flight="route.flight" /> -->
       </div>
     </div>
     <button class="btn btn--flight-select">ВЫБРАТЬ</button>
@@ -31,6 +28,11 @@ import FlightRoute from './flight-route.vue';
 export default {
   name: 'FlightCard',
   components: { FlightRoute },
+  data() {
+    return {
+      flight: this.route.flight,
+    };
+  },
   props: {
     route: {
       type: Object,
@@ -39,16 +41,21 @@ export default {
   },
   computed: {
     getTotalPrice() {
-      switch (this.route.flight.price.total.currencyCode) {
+      switch (this.flight.price.total.currencyCode) {
         case 'RUB':
-          return `${this.route.flight.price.total.amount} \u20BD`;
+          return `${this.flight.price.total.amount} \u20BD`;
         case 'USD':
-          return `${this.route.flight.price.rates.totalUsd.amount} \u0024`;
+          return `${this.flight.price.rates.totalUsd.amount} \u0024`;
         case 'EUR':
-          return `${this.route.flight.price.rates.totalEur.amount} \u20AC`;
+          return `${this.flight.price.rates.totalEur.amount} \u20AC`;
         default:
           return '';
       }
+    },
+  },
+  methods: {
+    getLogo() {
+      return `http://pics.avs.io/99/36/${this.flight.carrier.uid}.png`;
     },
   },
 };
