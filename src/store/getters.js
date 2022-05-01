@@ -1,4 +1,4 @@
-import { CARDS_PER_PAGE_LIMIT } from '@/const';
+import { CARDS_PER_PAGE_LIMIT, Sorting } from '@/const';
 import { State } from './state';
 
 const GetterType = {
@@ -8,7 +8,33 @@ const GetterType = {
 };
 
 const getters = {
-  [GetterType.GET_VISIBLE_FLIGHTS]: (state) => state[State.FLIGHTS].slice(0, CARDS_PER_PAGE_LIMIT),
+  [GetterType.GET_VISIBLE_FLIGHTS](state) {
+    const flights = state[State.FLIGHTS].slice();
+
+    switch (state[State.CURRENT_SORTING]) {
+      case Sorting.PRICE_DESC.value:
+        flights.sort((a, b) => b.flight.price.total.amount - a.flight.price.total.amount);
+        break;
+      case Sorting.PRICE_ASC.value:
+        flights.sort((a, b) => a.flight.price.total.amount - b.flight.price.total.amount);
+        break;
+      case Sorting.TIME_ASC.value:
+        flights.sort((a, b) => {
+          const totalDurationA = a.flight.legs.reduce(
+            (prev, next) => prev.duration + next.duration,
+          );
+          const totalDurationB = b.flight.legs.reduce(
+            (prev, next) => prev.duration + next.duration,
+          );
+          return totalDurationA - totalDurationB;
+        });
+        break;
+      default:
+        break;
+    }
+
+    return flights.slice(0, CARDS_PER_PAGE_LIMIT);
+  },
   [GetterType.GET_TOTAL_FLIGHTS_NUM]: (state) => state[State.FLIGHTS].length,
   [GetterType.GET_CARRIERS_LIST]: (state) => {
     const carriers = state[State.FLIGHTS]
@@ -27,7 +53,6 @@ const getters = {
         }
         return 0;
       })
-      .slice()
       /* Вторичная сортировка по цене */
       .sort((a, b) => {
         if (a.name === b.name) {
@@ -37,14 +62,14 @@ const getters = {
       });
 
     /* Оставляем самые дешевые для каждого уникального перевозчика */
-    const filtered = carriers.reduce((acc, carrier) => {
+    const result = carriers.reduce((acc, carrier) => {
       if (!acc.some((item) => item.name === carrier.name)) {
         acc.push(carrier);
       }
       return acc;
     }, []);
 
-    return filtered;
+    return result;
   },
 };
 

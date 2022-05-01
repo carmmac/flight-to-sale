@@ -11,14 +11,18 @@
 </template>
 
 <script>
+import { State } from '@/store/state';
 import { GetterType } from '@/store/getters';
-import { mapGetters } from 'vuex';
+import { mapGetters, mapState } from 'vuex';
 import FlightCard from './flight-card.vue';
 
 export default {
   name: 'FlightList',
   components: { FlightCard },
   computed: {
+    ...mapState({
+      currentSorting: State.CURRENT_SORTING,
+    }),
     ...mapGetters({
       totalFlightsNum: GetterType.GET_TOTAL_FLIGHTS_NUM,
       visibleFlights: GetterType.GET_VISIBLE_FLIGHTS,

@@ -4,6 +4,7 @@ const MutationType = {
   SET_FLIGHTS: 'SET_FLIGHTS',
   SET_DATA_LOADED: 'SET_DATA_LOADED',
   SET_CURRENCY: 'SET_CURRENCY',
+  SET_SORTING: 'SET_SORTING',
 };
 
 const mutations = {
@@ -15,6 +16,9 @@ const mutations = {
   },
   [MutationType.SET_CURRENCY]: (state, payload) => {
     state[State.CURRENCY] = payload;
+  },
+  [MutationType.SET_SORTING]: (state, payload) => {
+    state[State.CURRENT_SORTING] = payload;
   },
 };
 

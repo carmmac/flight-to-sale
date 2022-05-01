@@ -2,7 +2,6 @@
   <div class="route">
     <div class="route__item route-header">
       <div class="departure-header">
-        <!--выровнять верт -->
         <span class="airport text--main-info">{{ getRouteDepartureInfo }}</span>
         <span class="text--info">({{ this.departure.departureAirport.uid }})</span>
       </div>
@@ -69,14 +68,14 @@ export default {
   computed: {
     getRouteDepartureInfo() {
       return `
-        ${this.departure.departureCity.caption},
-        ${this.departure.departureAirport.caption}
+        ${this.departure.departureCity?.caption ?? ''},
+        ${this.departure.departureAirport?.caption ?? ''}
       `;
     },
     getRouteArrivalInfo() {
       return `
-        ${this.arrival.arrivalCity.caption},
-        ${this.arrival.arrivalAirport.caption}
+        ${this.arrival.arrivalCity?.caption ?? ''},
+        ${this.arrival.arrivalAirport?.caption ?? ''}
       `;
     },
     getRouteTransfers() {

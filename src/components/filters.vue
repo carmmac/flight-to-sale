@@ -4,19 +4,12 @@
     <form action="#">
       <fieldset class="filter-section filter-section--sort">
         <h3 class="filter-section__heading text--filter-heading">Сортировать</h3>
-        <!-- как данные отправляются? name & id -->
-        <label class="text--base" for="price-max">
-          <input type="radio" name="sort" id="price-max" checked />
-          по возрастанию цены</label
-        >
-        <label class="text--base" for="price-min">
-          <input type="radio" name="sort" id="price-min" />
-          по убыванию цены</label
-        >
-        <label class="text--base" for="flight-time">
-          <input type="radio" name="sort" id="flight-time" />
-          по времени в пути</label
-        >
+        <sorting-input
+          v-for="({ label, value }, i) in sortingOptions"
+          :key="`sortingOption-${i}`"
+          :sortingLabel="label"
+          :sortingValue="value"
+        />
       </fieldset>
       <fieldset class="filter-section">
         <h3 class="filter-section__heading text--filter-heading">Фильтровать</h3>
@@ -59,10 +52,17 @@
 <script>
 import { GetterType } from '@/store/getters';
 import { mapGetters } from 'vuex';
-import { CARRIER_LABEL_LENGTH_MAX } from '../const';
+import { CARRIER_LABEL_LENGTH_MAX, Sorting } from '../const';
+import SortingInput from './sorting-input.vue';
 
 export default {
   name: 'FilterPanel',
+  components: { SortingInput },
+  data() {
+    return {
+      sortingOptions: Object.values(Sorting),
+    };
+  },
   computed: {
     ...mapGetters({
       carriers: GetterType.GET_CARRIERS_LIST,
