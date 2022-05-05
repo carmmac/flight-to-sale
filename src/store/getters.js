@@ -1,4 +1,4 @@
-import { CARDS_PER_PAGE_LIMIT, Sorting } from '@/const';
+import { Sorting } from '@/const';
 import { State } from './state';
 
 const GetterType = {
@@ -81,7 +81,7 @@ const getters = {
         break;
     }
 
-    return filtered.slice(0, CARDS_PER_PAGE_LIMIT);
+    return filtered;
   },
   [GetterType.GET_TOTAL_FLIGHTS_NUM]: (state) => state[State.FLIGHTS].length,
   [GetterType.GET_CARRIERS_LIST]: (state) => {
