@@ -1,38 +1,10 @@
 <template>
   <aside class="filters">
     <h2 class="visually-hidden">Опции</h2>
-    <form action="#">
-      <fieldset class="filter-section filter-section--sort">
-        <h3 class="filter-section__heading text--filter-heading">Сортировать</h3>
-        <sorting-input
-          v-for="({ label, value }, i) in sortingOptions"
-          :key="`sortingOption-${i}`"
-          :sortingLabel="label"
-          :sortingValue="value"
-        />
-      </fieldset>
-      <fieldset class="filter-section">
-        <h3 class="filter-section__heading text--filter-heading">Фильтровать</h3>
-        <label class="text--base" for="one-transfer">
-          <input type="checkbox" name="filter" id="one-transfer" />
-          1 пересадка</label
-        >
-        <label class="text--base" for="no-transfer">
-          <input type="checkbox" name="filter" id="no-transfer" />
-          без пересадок</label
-        >
-      </fieldset>
-      <fieldset class="filter-section">
-        <h3 class="filter-section__heading text--filter-heading">Цена</h3>
-        <label class="text--base" for="price-limit-min">
-          От
-          <input type="text" name="price-limit" id="price-limit-min" placeholder="0" />
-        </label>
-        <label class="text--base" for="price-limit-max">
-          До
-          <input type="text" name="price-limit" id="price-limit-max" placeholder="10000" />
-        </label>
-      </fieldset>
+    <div>
+      <sorting-bar />
+      <filters-transfer />
+      <filters-price />
       <fieldset class="filter-section">
         <h3 class="filter-section__heading text--filter-heading">Авиакомпании</h3>
         <label
@@ -45,7 +17,7 @@
           {{ getCarrierLabel(carrier) }}
         </label>
       </fieldset>
-    </form>
+    </div>
   </aside>
 </template>
 
@@ -53,11 +25,13 @@
 import { GetterType } from '@/store/getters';
 import { mapGetters } from 'vuex';
 import { CARRIER_LABEL_LENGTH_MAX, Sorting } from '../const';
-import SortingInput from './sorting-input.vue';
+import SortingBar from './sorting-bar.vue';
+import FiltersTransfer from './filters-transfer.vue';
+import FiltersPrice from './filters-price.vue';
 
 export default {
   name: 'FilterPanel',
-  components: { SortingInput },
+  components: { SortingBar, FiltersTransfer, FiltersPrice },
   data() {
     return {
       sortingOptions: Object.values(Sorting),
@@ -80,5 +54,3 @@ export default {
   },
 };
 </script>
-
-<style></style>

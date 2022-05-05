@@ -1,6 +1,6 @@
 /* Constant vars */
 
-const CARDS_PER_PAGE_LIMIT = 50;
+const CARDS_PER_PAGE_LIMIT = 10;
 const CARRIER_LABEL_LENGTH_MAX = 14;
 
 const Currency = {
@@ -20,7 +20,24 @@ const Sorting = {
   },
   TIME_ASC: {
     label: 'самые быстрые',
-    value: 'time_asc',
+    value: 'timeAsc',
+  },
+};
+
+const Filter = {
+  TRANSFERS: {
+    SINGLE: {
+      label: '1 пересадка',
+      name: 'filter-transfer-single',
+    },
+    ZERO: {
+      label: 'без пересадок',
+      name: 'filter-transfer-zero',
+    },
+  },
+  CARRIER: {
+    label: '',
+    value: '',
   },
 };
 
@@ -34,5 +51,6 @@ export {
   CARRIER_LABEL_LENGTH_MAX,
   Currency,
   Sorting,
+  Filter,
   DateFormat,
 };

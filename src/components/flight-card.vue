@@ -11,9 +11,9 @@
     <div class="card__body">
       <div class="card__directions">
         <flight-route
-          v-for="(transfer, i) in route.flight.legs"
+          v-for="(leg, i) in route.flight.legs"
           :key="`leg-${i}`"
-          :transfer="transfer"
+          :leg="leg"
           :carrier="route.flight.carrier"
         />
       </div>

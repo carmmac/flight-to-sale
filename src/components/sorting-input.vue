@@ -1,9 +1,9 @@
 <template>
-  <label class="text--base" :for="sortingValue">
+  <label class="text--base" :for="`sorting-${sortingValue}`">
     <input
       type="radio"
-      name="sorting"
-      :id="sortingValue"
+      :name="`sorting-${sortingValue}`"
+      :id="`sorting-${sortingValue}`"
       @change="changeSorting(sortingValue)"
       :checked="isChecked"
     />

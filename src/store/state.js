@@ -4,7 +4,7 @@ const State = {
   FLIGHTS: 'flights',
   IS_DATA_LOADED: 'isDataLoaded',
   CURRENCY: 'currency',
-  CURRENT_FILTER: 'currentFilter',
+  CURRENT_FILTERS: 'currentFilters',
   CURRENT_SORTING: 'currentSorting',
 };
 
@@ -16,6 +16,17 @@ const initialState = {
   [State.IS_DATA_LOADED]: false,
   [State.CURRENCY]: DEFAULT_CURRENCY,
   [State.CURRENT_SORTING]: DEFAULT_SORTING,
+  [State.CURRENT_FILTERS]: {
+    TRANSFERS: {
+      ZERO: false,
+      SINGLE: false,
+    },
+    PRICE: {
+      MIN: undefined,
+      MAX: undefined,
+    },
+    CARRIERS: new Set(),
+  },
 };
 
 const state = initialState;

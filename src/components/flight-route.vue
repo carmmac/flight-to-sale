@@ -20,9 +20,7 @@
           humanizeDate(this.departure.departureDate, DateFormat.DATE)
         }}</span>
       </div>
-      <span class="journey-total text--main-info">{{
-        getFlightDuration(this.transfer.duration)
-      }}</span>
+      <span class="journey-total text--main-info">{{ getFlightDuration(this.leg.duration) }}</span>
       <div class="arrival-info">
         <span class="arrival__date text--info">{{
           humanizeDate(this.arrival.arrivalDate, DateFormat.DATE)
@@ -32,7 +30,7 @@
         </span>
       </div>
     </div>
-    <div v-if="transfersCount > 0" class="route-transfers">
+    <div v-if="getRouteTransfersCount > 0" class="route-transfers">
       {{ getRouteTransfers }}
     </div>
     <div class="route__item">
@@ -50,13 +48,13 @@ export default {
   data() {
     return {
       DateFormat,
-      transfersCount: this.transfer.segments.length - 1,
-      departure: this.transfer.segments[0],
-      arrival: this.transfer.segments[this.transfer.segments.length - 1],
+      // transfersCount: this.leg.segments.length - 1,
+      departure: this.leg.segments[0],
+      arrival: this.leg.segments[this.leg.segments.length - 1],
     };
   },
   props: {
-    transfer: {
+    leg: {
       type: Object,
       required: true,
     },
@@ -79,13 +77,16 @@ export default {
       `;
     },
     getRouteTransfers() {
-      if (this.transfersCount === 1) {
-        return `${this.transfersCount} пересадка`;
+      if (this.getRouteTransfersCount === 1) {
+        return `${this.getRouteTransfersCount} пересадка`;
       }
-      if (this.transfersCount > 1 && this.transfersCount < 5) {
-        return `${this.transfersCount} пересадки`;
+      if (this.getRouteTransfersCount > 1 && this.getRouteTransfersCount < 5) {
+        return `${this.getRouteTransfersCount} пересадки`;
       }
-      return `${this.transfersCount} пересадок`;
+      return `${this.getRouteTransfersCount} пересадок`;
+    },
+    getRouteTransfersCount() {
+      return this.leg.segments.length - 1;
     },
   },
   methods: {
