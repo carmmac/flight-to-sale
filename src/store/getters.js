@@ -1,4 +1,5 @@
 import { Sorting } from '@/const';
+import { sortByPriceMax, sortByPriceMin, sortByTimeMin } from '@/utils';
 import { State } from './state';
 
 const GetterType = {
@@ -22,7 +23,10 @@ const getters = {
       if (priceMin || priceMax) {
         return result.filter(({ flight }) => {
           if (priceMin && priceMax) {
-            return flight.price.total.amount >= priceMin && flight.price.total.amount <= priceMax;
+            return (
+              flight.price.total.amount >= priceMin
+              && flight.price.total.amount <= priceMax
+            );
           }
           if (priceMin) {
             return flight.price.total.amount >= priceMin;
@@ -75,23 +79,16 @@ const getters = {
     /* Применение функций фильтрации */
     const filtered = filterByCarriers(filterByTransfers(filterByPrice(flights)));
 
+    /* Применение сортировки */
     switch (state[State.CURRENT_SORTING]) {
       case Sorting.PRICE_DESC.value:
-        filtered.sort((a, b) => b.flight.price.total.amount - a.flight.price.total.amount);
+        filtered.sort(sortByPriceMax);
         break;
       case Sorting.PRICE_ASC.value:
-        filtered.sort((a, b) => a.flight.price.total.amount - b.flight.price.total.amount);
+        filtered.sort(sortByPriceMin);
         break;
       case Sorting.TIME_ASC.value:
-        filtered.sort((a, b) => {
-          const totalDurationA = a.flight.legs.reduce(
-            (prev, next) => prev.duration + next.duration,
-          );
-          const totalDurationB = b.flight.legs.reduce(
-            (prev, next) => prev.duration + next.duration,
-          );
-          return totalDurationA - totalDurationB;
-        });
+        filtered.sort(sortByTimeMin);
         break;
       default:
         break;

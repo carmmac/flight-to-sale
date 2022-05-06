@@ -8,7 +8,8 @@
         name="price-limit"
         id="price-limit-min"
         placeholder="0"
-        @change="setPriceMin($event.target.value)"
+        v-model.lazy="priceMinValue"
+        @change="setPriceMin(priceMinValue)"
       />
     </label>
     <label class="text--base" for="price-limit-max">
@@ -17,8 +18,9 @@
         type="text"
         name="price-limit"
         id="price-limit-max"
-        placeholder="10000"
-        @change="setPriceMax($event.target.value)"
+        placeholder="100000"
+        v-model.lazy="priceMaxValue"
+        @change="setPriceMax(priceMaxValue)"
       />
     </label>
   </fieldset>
@@ -30,6 +32,12 @@ import { mapMutations } from 'vuex';
 
 export default {
   name: 'FiltersPrice',
+  data() {
+    return {
+      priceMinValue: '',
+      priceMaxValue: '',
+    };
+  },
   methods: {
     ...mapMutations({
       setPriceMin: MutationType.SET_PRICE_FILTER_MIN,
