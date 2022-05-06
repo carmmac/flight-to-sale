@@ -8,7 +8,7 @@ const State = {
   CURRENT_SORTING: 'currentSorting',
 };
 
-const DEFAULT_CURRENCY = Currency.RUB;
+const DEFAULT_CURRENCY = Currency.RUB.CURRENCY_CODE;
 const DEFAULT_SORTING = Sorting.PRICE_ASC.value;
 
 const initialState = {

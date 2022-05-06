@@ -4,17 +4,7 @@
       <div class="page-wrapper">
         <h1 class="visually-hidden">Агрегатор поиска авиабилетов</h1>
         <div class="page-header">
-          <span class="page-header__title">Валюта:</span>
-          <select name="currency" id="currency" @change="changeCurrency($event.target.value)">
-            <option
-              v-for="(item, i) in Currency"
-              :value="item"
-              :selected="isSelected(item)"
-              :key="`currency-${i}`"
-            >
-              {{ item }}
-            </option>
-          </select>
+          <currency-selector />
         </div>
         <main v-if="isDataLoaded" class="page-main">
           <filter-panel />
@@ -27,14 +17,13 @@
 </template>
 
 <script>
-import { mapActions, mapMutations, mapState } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import { State } from './store/state';
 import { ActionType } from './store/actions';
-import { MutationType } from './store/mutations';
-import { Currency } from './const';
 import FlightList from './components/flight-list.vue';
 import FilterPanel from './components/filters/filters-panel.vue';
 import LoadingSpinner from './components/loading.vue';
+import CurrencySelector from './components/currency-selector.vue';
 
 export default {
   name: 'App',
@@ -42,18 +31,13 @@ export default {
     FlightList,
     FilterPanel,
     LoadingSpinner,
-  },
-  data() {
-    return {
-      Currency,
-    };
+    CurrencySelector,
   },
   created() {
     this.load();
   },
   computed: {
     ...mapState({
-      selectedCurrency: State.CURRENCY,
       isDataLoaded: [State.IS_DATA_LOADED],
     }),
   },
@@ -61,12 +45,6 @@ export default {
     ...mapActions({
       load: ActionType.FETCH_FLIGHTS,
     }),
-    ...mapMutations({
-      changeCurrency: MutationType.SET_CURRENCY,
-    }),
-    isSelected(currency) {
-      return currency === this.selectedCurrency;
-    },
   },
 };
 </script>

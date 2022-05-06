@@ -9,12 +9,12 @@
         value: $event.target.checked
       })"
     />
-    {{ getCarrierLabel(carrierName, carrierPrice) }}
+    {{ getCarrierLabel(carrierPrice) }}
   </label>
 </template>
 
 <script>
-import { CARRIER_LABEL_LENGTH_MAX } from '@/const';
+import { CARRIER_LABEL_LENGTH_MAX, Currency, RUB_SHORTHAND } from '@/const';
 import { mapActions } from 'vuex';
 import { ActionType } from '@/store/actions';
 
@@ -26,7 +26,11 @@ export default {
       required: true,
     },
     carrierPrice: {
-      type: Object,
+      type: String,
+      required: true,
+    },
+    carrierCurrency: {
+      type: String,
       required: true,
     },
   },
@@ -36,16 +40,24 @@ export default {
         ? `${this.carrierName.slice(0, CARRIER_LABEL_LENGTH_MAX)}...`
         : `${this.carrierName}`;
     },
-    trimCarrierCurrency() {
-      return `${this.carrierPrice.currency[0]}.`;
+    getCarrierCurrency() {
+      switch (this.carrierCurrency) {
+        case Currency.RUB.CURRENCY_CODE:
+          return RUB_SHORTHAND;
+        case Currency.EUR.CURRENCY_CODE:
+        case Currency.USD.CURRENCY_CODE:
+          return this.carrierCurrency;
+        default:
+          return '';
+      }
     },
   },
   methods: {
-    getCarrierLabel(name, price) {
+    getCarrierLabel(price) {
       return `
         ${this.trimCarrierLabel}
-        от ${price.amount}
-        ${this.trimCarrierCurrency}
+        от ${price}
+        ${this.getCarrierCurrency}
       `;
     },
     ...mapActions({

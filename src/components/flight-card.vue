@@ -23,6 +23,10 @@
 </template>
 
 <script>
+import { Currency } from '@/const';
+import { getFlightPriceParam } from '@/utils';
+import { State } from '@/store/state';
+import { mapState } from 'vuex';
 import FlightRoute from './flight-route.vue';
 
 export default {
@@ -35,19 +39,25 @@ export default {
     },
   },
   computed: {
+    ...mapState({
+      selectedCurrency: State.CURRENCY,
+    }),
+    getCurrencySymbol() {
+      switch (this.selectedCurrency) {
+        case Currency.RUB.CURRENCY_CODE:
+          return Currency.RUB.SYMBOL;
+        case Currency.EUR.CURRENCY_CODE:
+          return Currency.EUR.SYMBOL;
+        case Currency.USD.CURRENCY_CODE:
+          return Currency.USD.SYMBOL;
+        default:
+          return '';
+      }
+    },
     getTotalPrice() {
-      return `${this.route.flight.price.total.amount} \u20BD`;
-
-      // switch (this.flight.price.total.currencyCode) {
-      //   case 'RUB':
-      //     return `${this.flight.price.total.amount} \u20BD`;
-      //   case 'USD':
-      //     return `${this.flight.price.rates.totalUsd.amount} \u0024`;
-      //   case 'EUR':
-      //     return `${this.flight.price.rates.totalEur.amount} \u20AC`;
-      //   default:
-      //     return '';
-      // }
+      return this.selectedCurrency === Currency.RUB.CURRENCY_CODE
+        ? `${getFlightPriceParam(this.selectedCurrency, this.route.flight)} ${this.getCurrencySymbol}`
+        : `${this.getCurrencySymbol}${getFlightPriceParam(this.selectedCurrency, this.route.flight)}`;
     },
   },
   methods: {

@@ -2,11 +2,21 @@
 
 const CARDS_PER_PAGE_LIMIT = 10;
 const CARRIER_LABEL_LENGTH_MAX = 14;
+const RUB_SHORTHAND = 'р.';
 
 const Currency = {
-  RUB: 'RUB',
-  USD: 'USD',
-  EUR: 'EUR',
+  RUB: {
+    CURRENCY_CODE: 'RUB',
+    SYMBOL: '\u20BD',
+  },
+  USD: {
+    CURRENCY_CODE: 'USD',
+    SYMBOL: '\u0024',
+  },
+  EUR: {
+    CURRENCY_CODE: 'EUR',
+    SYMBOL: '\u20AC',
+  },
 };
 
 const Sorting = {
@@ -49,6 +59,7 @@ const DateFormat = {
 export {
   CARDS_PER_PAGE_LIMIT,
   CARRIER_LABEL_LENGTH_MAX,
+  RUB_SHORTHAND,
   Currency,
   Sorting,
   Filter,

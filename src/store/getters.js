@@ -1,5 +1,5 @@
 import { Sorting } from '@/const';
-import { sortByPriceMax, sortByPriceMin, sortByTimeMin } from '@/utils';
+import { getFlightPriceParam, sortByTimeMin } from '@/utils';
 import { State } from './state';
 
 const GetterType = {
@@ -10,6 +10,7 @@ const GetterType = {
 const getters = {
   [GetterType.GET_VISIBLE_FLIGHTS]: (state) => {
     const flights = state[State.FLIGHTS].slice();
+    const selectedCurrency = state[State.CURRENCY];
 
     /*
     ** ФУНКЦИИ ФИЛЬТРАЦИИ
@@ -22,17 +23,19 @@ const getters = {
 
       if (priceMin || priceMax) {
         return result.filter(({ flight }) => {
+          const flightPriceParam = getFlightPriceParam(selectedCurrency, flight);
+
           if (priceMin && priceMax) {
             return (
-              flight.price.total.amount >= priceMin
-              && flight.price.total.amount <= priceMax
+              flightPriceParam >= priceMin
+              && flightPriceParam <= priceMax
             );
           }
           if (priceMin) {
-            return flight.price.total.amount >= priceMin;
+            return flightPriceParam >= priceMin;
           }
           if (priceMax) {
-            return flight.price.total.amount <= priceMax;
+            return flightPriceParam <= priceMax;
           }
           return true;
         });
@@ -82,10 +85,14 @@ const getters = {
     /* Применение сортировки */
     switch (state[State.CURRENT_SORTING]) {
       case Sorting.PRICE_DESC.value:
-        filtered.sort(sortByPriceMax);
+        filtered.sort((a, b) => (
+          getFlightPriceParam(selectedCurrency, b.flight)
+          - getFlightPriceParam(selectedCurrency, a.flight)));
         break;
       case Sorting.PRICE_ASC.value:
-        filtered.sort(sortByPriceMin);
+        filtered.sort((a, b) => (
+          getFlightPriceParam(selectedCurrency, a.flight)
+          - getFlightPriceParam(selectedCurrency, b.flight)));
         break;
       case Sorting.TIME_ASC.value:
         filtered.sort(sortByTimeMin);
@@ -97,11 +104,14 @@ const getters = {
     return filtered;
   },
   [GetterType.GET_CARRIERS_LIST]: (state) => {
+    const selectedCurrency = state[State.CURRENCY];
+
     const carriers = state[State.FLIGHTS]
       /* Адаптация формата данных */
       .map(({ flight }) => ({
         name: flight.carrier.caption,
-        price: flight.price.total,
+        price: getFlightPriceParam(selectedCurrency, flight),
+        currency: selectedCurrency,
       }))
       /* Первичная сортировка по названию перевозчика */
       .sort((a, b) => {
@@ -116,7 +126,7 @@ const getters = {
       /* Вторичная сортировка по цене */
       .sort((a, b) => {
         if (a.name === b.name) {
-          return a.price.ammount - b.price.amount;
+          return a.price - b.price;
         }
         return a.name - b.name;
       });

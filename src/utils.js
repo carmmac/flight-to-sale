@@ -1,3 +1,18 @@
+import { Currency } from './const';
+
+const getFlightPriceParam = (selectedCurrency, flight) => {
+  switch (selectedCurrency) {
+    case Currency.RUB.CURRENCY_CODE:
+      return flight.price.total.amount;
+    case Currency.EUR.CURRENCY_CODE:
+      return flight.price.rates.totalEur.amount;
+    case Currency.USD.CURRENCY_CODE:
+      return flight.price.rates.totalUsd.amount;
+    default:
+      return {};
+  }
+};
+
 const getTotalFlightDuration = ({ flight }) => flight.legs
   .reduce((prev, next) => prev.duration + next.duration);
 
@@ -13,6 +28,7 @@ const sortByTimeMin = (a, b) => {
 };
 
 export {
+  getFlightPriceParam,
   getTotalFlightDuration,
   sortByPriceMax,
   sortByPriceMin,

@@ -3,11 +3,12 @@
     <h3 class="filter-section__heading text--filter-heading">Авиакомпании</h3>
 
     <filter-carriers-input
-      v-for="({ name, price }, i) in carriers"
+      v-for="({ name, price, currency }, i) in carriers"
       :v-if="name && price"
       :key="`filter-carriers-input-${i}`"
       :carrierName="name"
       :carrierPrice="price"
+      :carrierCurrency="currency"
     />
   </fieldset>
 </template>
