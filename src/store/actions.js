@@ -1,16 +1,12 @@
+import { Filter } from '@/const';
 import { MutationType } from './mutations';
 import { result as mocks } from '../../mocks/flights.json';
-// import { State } from './state';
-
-// mocks.flights.forEach((item, i) => {
-//   if (item.flight.legs.every((leg) => leg.segments.length < 2)) {
-//     console.log(i);
-//   }
-// });
+import { State } from './state';
 
 const ActionType = {
   FETCH_FLIGHTS: 'fetchFlights',
   CHANGE_TRANSFER_FILTER: 'changeTransferFilter',
+  CHANGE_CARRIERS_FILTER: 'changeCarriersFilter',
 };
 
 const actions = {
@@ -21,11 +17,25 @@ const actions = {
     }, 1000);
   },
   [ActionType.CHANGE_TRANSFER_FILTER]: ({ commit }, { filterName, value }) => {
-    if (filterName === 'filter-transfer-single') {
-      commit(MutationType.SET_TRANSFER_FILTER_SINGLE, value);
+    switch (filterName) {
+      case Filter.TRANSFERS.SINGLE.name:
+        commit(MutationType.SET_TRANSFER_FILTER_SINGLE, value);
+        break;
+      case Filter.TRANSFERS.ZERO.name:
+        commit(MutationType.SET_TRANSFER_FILTER_ZERO, value);
+        break;
+      /* Возможно расширение на дополнительные параметры фильтрации */
+      default:
+        break;
     }
-    if (filterName === 'filter-transfer-zero') {
-      commit(MutationType.SET_TRANSFER_FILTER_ZERO, value);
+  },
+  [ActionType.CHANGE_CARRIERS_FILTER]: ({ commit, state }, { carrierName, value }) => {
+    if (!state[State.CURRENT_FILTERS].CARRIERS.includes(carrierName)) {
+      if (value) {
+        commit(MutationType.ADD_CARRIERS_FILTER, carrierName);
+      }
+    } else if (!value) {
+      commit(MutationType.REMOVE_CARRIERS_FILTER, carrierName);
     }
   },
 };

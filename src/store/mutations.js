@@ -9,6 +9,8 @@ const MutationType = {
   SET_TRANSFER_FILTER_SINGLE: 'SET_TRANSFER_FILTER_SINGLE',
   SET_PRICE_FILTER_MIN: 'SET_PRICE_FILTER_MIN',
   SET_PRICE_FILTER_MAX: 'SET_PRICE_FILTER_MAX',
+  ADD_CARRIERS_FILTER: 'ADD_CARRIERS_FILTER',
+  REMOVE_CARRIERS_FILTER: 'REMOVE_CARRIERS_FILTER',
 };
 
 const mutations = {
@@ -35,6 +37,14 @@ const mutations = {
   },
   [MutationType.SET_PRICE_FILTER_MAX]: (state, payload) => {
     state[State.CURRENT_FILTERS].PRICE.MAX = payload;
+  },
+  [MutationType.ADD_CARRIERS_FILTER]: (state, payload) => {
+    state[State.CURRENT_FILTERS].CARRIERS.push(payload);
+  },
+  [MutationType.REMOVE_CARRIERS_FILTER]: (state, payload) => {
+    const index = state[State.CURRENT_FILTERS].CARRIERS.indexOf(payload);
+    state[State.CURRENT_FILTERS].CARRIERS.splice(index, 1);
+    // state[State.CURRENT_FILTERS].CARRIERS.delete(payload);
   },
 };
 

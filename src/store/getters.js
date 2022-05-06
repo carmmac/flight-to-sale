@@ -3,7 +3,6 @@ import { State } from './state';
 
 const GetterType = {
   GET_VISIBLE_FLIGHTS: 'getVisibleFlights',
-  GET_TOTAL_FLIGHTS_NUM: 'getTotalFlightsNum',
   GET_CARRIERS_LIST: 'getCarriersList',
 };
 
@@ -11,6 +10,10 @@ const getters = {
   [GetterType.GET_VISIBLE_FLIGHTS]: (state) => {
     const flights = state[State.FLIGHTS].slice();
 
+    /*
+    ** ФУНКЦИИ ФИЛЬТРАЦИИ
+    */
+    /* Фильтрация по цене */
     const filterByPrice = (arr) => {
       const result = arr;
       const priceMin = +state[State.CURRENT_FILTERS].PRICE.MIN;
@@ -33,6 +36,7 @@ const getters = {
       return result;
     };
 
+    /* Фильтрация по количеству пересадок */
     const filterByTransfers = (arr) => {
       const result = arr;
       const isZeroTransfersFilterSelected = state[State.CURRENT_FILTERS].TRANSFERS.ZERO;
@@ -57,7 +61,19 @@ const getters = {
       return result;
     };
 
-    const filtered = filterByTransfers(filterByPrice(flights));
+    /* Фильтрация по перевозчику */
+    const filterByCarriers = (arr) => {
+      const result = arr;
+      const selectedCarriers = state[State.CURRENT_FILTERS].CARRIERS;
+
+      if (selectedCarriers.length > 0) {
+        return result.filter(({ flight }) => selectedCarriers.includes(flight.carrier.caption));
+      }
+      return result;
+    };
+
+    /* Применение функций фильтрации */
+    const filtered = filterByCarriers(filterByTransfers(filterByPrice(flights)));
 
     switch (state[State.CURRENT_SORTING]) {
       case Sorting.PRICE_DESC.value:
@@ -83,13 +99,12 @@ const getters = {
 
     return filtered;
   },
-  [GetterType.GET_TOTAL_FLIGHTS_NUM]: (state) => state[State.FLIGHTS].length,
   [GetterType.GET_CARRIERS_LIST]: (state) => {
     const carriers = state[State.FLIGHTS]
       /* Адаптация формата данных */
       .map(({ flight }) => ({
         name: flight.carrier.caption,
-        price: flight.price.total.amount,
+        price: flight.price.total,
       }))
       /* Первичная сортировка по названию перевозчика */
       .sort((a, b) => {
@@ -104,7 +119,7 @@ const getters = {
       /* Вторичная сортировка по цене */
       .sort((a, b) => {
         if (a.name === b.name) {
-          return a.price - b.price;
+          return a.price.ammount - b.price.amount;
         }
         return a.name - b.name;
       });

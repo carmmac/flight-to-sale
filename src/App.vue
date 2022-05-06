@@ -33,7 +33,7 @@ import { ActionType } from './store/actions';
 import { MutationType } from './store/mutations';
 import { Currency } from './const';
 import FlightList from './components/flight-list.vue';
-import FilterPanel from './components/filters.vue';
+import FilterPanel from './components/filters/filters-panel.vue';
 import LoadingSpinner from './components/loading.vue';
 
 export default {

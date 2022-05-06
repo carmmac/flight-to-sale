@@ -52,7 +52,7 @@ export default {
   },
   methods: {
     getLogoSrc() {
-      return `http://pics.avs.io/99/36/${this.route.flight.carrier.uid}.png`;
+      return `http://pics.avs.io/99/36/${this.route.flight.carrier.airlineCode}.png`;
     },
   },
 };

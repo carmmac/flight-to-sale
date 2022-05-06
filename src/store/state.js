@@ -25,7 +25,7 @@ const initialState = {
       MIN: undefined,
       MAX: undefined,
     },
-    CARRIERS: new Set(),
+    CARRIERS: [],
   },
 };
 

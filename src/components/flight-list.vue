@@ -25,14 +25,13 @@ export default {
       currentSorting: State.CURRENT_SORTING,
     }),
     ...mapGetters({
-      totalFlightsNum: GetterType.GET_TOTAL_FLIGHTS_NUM,
-      visibleFlights: GetterType.GET_VISIBLE_FLIGHTS,
+      flightsToRender: GetterType.GET_VISIBLE_FLIGHTS,
     }),
     getFlightsPerPage() {
-      return this.visibleFlights.slice(0, CARDS_PER_PAGE_LIMIT);
+      return this.flightsToRender.slice(0, CARDS_PER_PAGE_LIMIT);
     },
     displayLoadMoreButton() {
-      return this.visibleFlights.length > CARDS_PER_PAGE_LIMIT;
+      return this.flightsToRender.length > CARDS_PER_PAGE_LIMIT;
     },
   },
 };
