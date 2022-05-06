@@ -48,7 +48,6 @@ export default {
   data() {
     return {
       DateFormat,
-      // transfersCount: this.leg.segments.length - 1,
       departure: this.leg.segments[0],
       arrival: this.leg.segments[this.leg.segments.length - 1],
     };
