@@ -1,12 +1,12 @@
 /* Flight card */
 
 .card {
-  margin-bottom: 30px;
+  margin-bottom: $card-margin-bottom;
 }
 
 .card__header {
   display: flex;
-  padding: 5px;
+  padding: $card-header-padding;
   background-color: $bg-card-header;
   color: $font-color-contrast;
 }

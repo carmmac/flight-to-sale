@@ -8,16 +8,16 @@
 
   &--load-more {
     display: block;
-    width: 250px;
-    padding: 10px;
+    width: $button--load-more-width;
+    padding: $button--load-more-padding;
     margin: 0 auto;
     border: 1px solid $color-base;
     background-color: $color-sub;
   }
 
   &--flight-select {
-    width: 100%;
-    padding: 10px;
+    width: $button--flight-select-width;
+    padding: $button--flight-select-padding;
     background-color: $bg-button--card;
     color: $font-color-contrast;
   }
