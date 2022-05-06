@@ -5,6 +5,7 @@ import { State } from './state';
 
 const ActionType = {
   FETCH_FLIGHTS: 'fetchFlights',
+  SELECT_FLIGHT: 'selectFlight',
   CHANGE_TRANSFER_FILTER: 'changeTransferFilter',
   CHANGE_CARRIERS_FILTER: 'changeCarriersFilter',
 };
@@ -15,6 +16,10 @@ const actions = {
       commit(MutationType.SET_FLIGHTS, mocks.flights);
       commit(MutationType.SET_DATA_LOADED, true);
     }, 1000);
+  },
+  [ActionType.SELECT_FLIGHT]: (_context, selectedFlight) => {
+    // eslint-disable-next-line no-console
+    console.log(selectedFlight);
   },
   [ActionType.CHANGE_TRANSFER_FILTER]: ({ commit }, { filterName, value }) => {
     switch (filterName) {

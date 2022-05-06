@@ -18,15 +18,16 @@
         />
       </div>
     </div>
-    <button class="btn btn--flight-select">ВЫБРАТЬ</button>
+    <button class="btn btn--flight-select" @click="selectFlight(route)">ВЫБРАТЬ</button>
   </article>
 </template>
 
 <script>
 import { Currency } from '@/const';
 import { getFlightPriceParam } from '@/utils';
+import { ActionType } from '@/store/actions';
 import { State } from '@/store/state';
-import { mapState } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import FlightRoute from './flight-route.vue';
 
 export default {
@@ -64,6 +65,9 @@ export default {
     getLogoSrc() {
       return `http://pics.avs.io/99/36/${this.route.flight.carrier.airlineCode}.png`;
     },
+    ...mapActions({
+      selectFlight: ActionType.SELECT_FLIGHT,
+    }),
   },
 };
 </script>
