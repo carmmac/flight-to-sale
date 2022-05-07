@@ -25,6 +25,11 @@
     @include text-sub;
   }
 
+  &--input-error {
+    @include text-sub;
+    color: $color-error;
+  }
+
   &--info {
     @include text-info;
   }

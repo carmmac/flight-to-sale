@@ -4,23 +4,26 @@
     <label class="text--base" for="price-limit-min">
       От
       <input
-        type="text"
+        type="number"
         name="price-limit"
         id="price-limit-min"
         placeholder="0"
-        v-model.lazy="priceMinValue"
-        @change="setPriceMin(priceMinValue)"
+        v-model.number="priceMinValue"
+        @keypress="checkNumbersOnly($event)"
+        @change="validatePrice($event.target.value)"
       />
     </label>
+    <span v-if="!isValid" class="text--input-error">{{ inputError.priceMin }}</span>
     <label class="text--base" for="price-limit-max">
       До
       <input
-        type="text"
+        type="number"
         name="price-limit"
         id="price-limit-max"
         placeholder="100000"
-        v-model.lazy="priceMaxValue"
-        @change="setPriceMax(priceMaxValue)"
+        v-model.number="priceMaxValue"
+        @keydown="checkNumbersOnly($event)"
+        @change="validatePrice()"
       />
     </label>
   </fieldset>
@@ -36,6 +39,10 @@ export default {
     return {
       priceMinValue: '',
       priceMaxValue: '',
+      isValid: true,
+      inputError: {
+        priceMin: 'Минимальная цена превышает максимальную',
+      },
     };
   },
   methods: {
@@ -43,6 +50,25 @@ export default {
       setPriceMin: MutationType.SET_PRICE_FILTER_MIN,
       setPriceMax: MutationType.SET_PRICE_FILTER_MAX,
     }),
+    checkNumbersOnly(evt) {
+      const event = evt || window.event;
+      const charCode = event.which ? event.which : event.keyCode;
+      if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        event.preventDefault();
+      } else {
+        return true;
+      }
+      return null;
+    },
+    validatePrice() {
+      if (this.priceMinValue > this.priceMaxValue && this.priceMaxValue) {
+        this.isValid = false;
+      } else {
+        this.isValid = true;
+        this.setPriceMin(this.priceMinValue);
+        this.setPriceMax(this.priceMaxValue);
+      }
+    },
   },
 };
 </script>
