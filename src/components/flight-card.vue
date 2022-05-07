@@ -2,7 +2,7 @@
   <article>
     <h3 class="visually-hidden">Перелет</h3>
     <header class="card__header">
-      <img :src="getLogoSrc()" class="card-logo" alt="Carrier logo" />
+      <img :src="getLogoSrc()" class="card-logo" alt="Carrier logo" width="99" height="36"/>
       <div class="card-price">
         <span class="card-price__title text--price">{{ getTotalPrice }}</span>
         <span class="card-price__info text--sub">Стоимость для одного взрослого пассажира</span>
