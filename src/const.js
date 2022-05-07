@@ -3,6 +3,7 @@
 const CARDS_PER_PAGE_LIMIT = 10;
 const CARRIER_LABEL_LENGTH_MAX = 14;
 const RUB_SHORTHAND = 'р.';
+const AIRLINE_LOGO_URL = 'http://pics.avs.io/99/36/';
 
 const Currency = {
   RUB: {
@@ -60,6 +61,7 @@ export {
   CARDS_PER_PAGE_LIMIT,
   CARRIER_LABEL_LENGTH_MAX,
   RUB_SHORTHAND,
+  AIRLINE_LOGO_URL,
   Currency,
   Sorting,
   Filter,

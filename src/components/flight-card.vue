@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { Currency } from '@/const';
+import { AIRLINE_LOGO_URL, Currency } from '@/const';
 import { getFlightPriceParam } from '@/utils';
 import { ActionType } from '@/store/actions';
 import { State } from '@/store/state';
@@ -63,7 +63,7 @@ export default {
   },
   methods: {
     getLogoSrc() {
-      return `http://pics.avs.io/99/36/${this.route.flight.carrier.airlineCode}.png`;
+      return `${AIRLINE_LOGO_URL}${this.route.flight.carrier.airlineCode}.png`;
     },
     ...mapActions({
       selectFlight: ActionType.SELECT_FLIGHT,
