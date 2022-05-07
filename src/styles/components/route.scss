@@ -45,8 +45,17 @@
   }
 }
 
-.departure-header {
+.departure-header,
+.arrival-header {
   text-align: center;
+}
+
+.departure-header {
+  margin-right: $card-route-elements-margin;
+}
+
+.arrival-header {
+  margin-left: $card-route-elements-margin;
 }
 
 .airport {
